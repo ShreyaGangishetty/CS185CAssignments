@@ -1,0 +1,63 @@
+Overview
+--------
+Kaggle provided a set of statistics (including views, likes, category, and comments) for videos trending on YouTube.  An overview of the data is located here:
+https://www.kaggle.com/datasnaek/youtube.  You'll need to create a free account (if you don't already have one) on Kaggle in order to access the data.
+
+
+Objective
+---------
+Calculate basic statistics for the YouTube data set (USvideos.csv only) from Kaggle using a single Hadoop MapReduce program. 
+
+TODO
+----
+Implement the MapReduce code that provides the following -- all in a single output file -- per category stats from USvideos.csv: 
+* most viewed video
+* most liked video
+* most disliked video
+
+The names of your 3 java source files must be MRdriver.java, MRmapper.java, and MRreducer.java.  The 3 classes must belong to a package called "youtube".  The grader will compile your code into a jar file and run it as follows:
+
+hadoop jar <jar-file> youtube.MRdriver <input file> <output dir>
+
+The output MUST match the following and be sorted in ascending order of category id's:
+category_id: <id>
+most views: video_id,thumbnail_link
+most likes: video_id,thumbnail_link
+most dislikes: video_id,thumbnail_link
+
+For example: 
+
+category_id: 1	
+most views: ufaDurSCKOk,https://i.ytimg.com/vi/ufaDurSCKOk/default.jpg
+most likes: 0R7MQwmbiQc,https://i.ytimg.com/vi/0R7MQwmbiQc/default.jpg
+most dislikes: dt__kig8PVU,https://i.ytimg.com/vi/dt__kig8PVU/default.jpg
+category_id: 10	
+most views: MBdVXkSdhwU,https://i.ytimg.com/vi/MBdVXkSdhwU/default.jpg
+most likes: MBdVXkSdhwU,https://i.ytimg.com/vi/MBdVXkSdhwU/default.jpg
+most dislikes: 1NyMSWqIJDQ,https://i.ytimg.com/vi/1NyMSWqIJDQ/default.jpg
+category_id: 15	
+most views: evvVtqmvE5w,https://i.ytimg.com/vi/evvVtqmvE5w/default.jpg
+most likes: evvVtqmvE5w,https://i.ytimg.com/vi/evvVtqmvE5w/default.jpg
+most dislikes: U2CqZNd6rgM,https://i.ytimg.com/vi/U2CqZNd6rgM/default.jpg
+category_id: 17	
+most views: LcZ2AuvxXNA,https://i.ytimg.com/vi/LcZ2AuvxXNA/default.jpg
+most likes: LcZ2AuvxXNA,https://i.ytimg.com/vi/LcZ2AuvxXNA/default.jpg
+most dislikes: LcZ2AuvxXNA,https://i.ytimg.com/vi/LcZ2AuvxXNA/default.jpg
+category_id: 19	
+most views: wGQtrwey-TI,https://i.ytimg.com/vi/wGQtrwey-TI/default.jpg
+most likes: wGQtrwey-TI,https://i.ytimg.com/vi/wGQtrwey-TI/default.jpg
+most dislikes: wGQtrwey-TI,https://i.ytimg.com/vi/wGQtrwey-TI/default.jpg
+...
+ 
+
+Hints and Tips
+--------------
+1. I recommend writing and compiling your MapReduce code in your IDE and then running your code from the command line on your laptop.  For this you'll need the hadoop client installed and working correctly (from lab 2).  Otherwise, you'll need to copy the jar file to your sandbox and run it from inside your sandbox (which is time-consuming).
+
+2. I recommend starting with your driver and mapper first.  Once you have the output you expect from the mapper (keys and composite values are all correct), then begin implementing your reducer.  This will reduce the amount of time it takes to debug problems.
+
+3. Recall that Hadoop will not overwrite existing directories.  So after each test run, you'll need to remove the output directory (or specify a different one for each run).
+
+4. The data is a little "dirty".  Make sure in your mapper that each record has the correct number of fields before trying to parse out fields of interest.
+
+ 
